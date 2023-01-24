@@ -1,25 +1,15 @@
 from openpyxl import *
+
 from random import randint
 from math import ceil
 
 
-def read_file_to_list(file_name: str) -> list:
-    # Читаем файл
-
-    work_table = input('Введите рабочий диапазон таблицы: ')
-    book = load_workbook(filename=file_name)
-    sheet = book.worksheets[0][work_table.split(':')[0] : work_table.split(':')[1]]
-    return sheet
-
-
-def create_dict_from_table(sheet: list) -> dict:
+def create_dict_from_table(values_dict, row, start_column_values: int) -> dict:
     # Формируем словарь из ячеек со значениями отличными от None
 
-    values_dict = {}
-    for row in sheet:
-        for cell in row:
-            if cell.value is not None:
-                values_dict.setdefault(cell.coordinate, cell.value)
+    for cell in row[start_column_values:]:
+        if cell.value is not None:
+            values_dict.setdefault(cell.coordinate, cell.value)
     return values_dict
 
 
@@ -115,14 +105,15 @@ def smudge_remain(new_values_dict: dict, remain: int, limit_value=300) -> tuple[
     return new_values_dict, remain
 
 
-def create_new_file(file_name: str, new_values_dict: dict) -> None:
+def create_new_file(file_name: str, result_values_list: list[dict]) -> None:
     # Соаздем новый файл и копируем в него данные из получившегося словаря
 
     wb = load_workbook(filename=file_name)
     ws = wb.active
 
-    for key, value in new_values_dict.items():
-        ws[key] = value
+    for new_values_dict in result_values_list:
+        for key, value in new_values_dict.items():
+            ws[key] = value
 
     wb.save('new_' + file_name)
 
