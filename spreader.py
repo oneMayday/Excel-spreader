@@ -37,9 +37,9 @@ def find_max_and_values(values_dict: dict, limit_value=300) -> tuple[int, int, i
     return sum_sales, sum_sales_count, opt_sum_sales, opt_sales_count, opt_sales_list, clear_sales
 
 
-def smudge_values(values_dict: dict, clear_sales: int, sum_sales: int, opt_sum_sales: int, limit_value=300)\
+def spread_values(values_dict: dict, clear_sales: int, sum_sales: int, opt_sum_sales: int, limit_value=300)\
         -> tuple[dict, int, int]:
-    # Приравниваем максимумы к (1, 10), размазываем значения по таблице, в соответствии с их процентным соотношением
+    # Приравниваем максимумы к (1, 10), распределяем значения по таблице, в соответствии с их процентным соотношением
 
     new_values_dict = values_dict.copy()
     sum_values_dict = sum([value for value in new_values_dict.values()])
@@ -74,8 +74,8 @@ def smudge_values(values_dict: dict, clear_sales: int, sum_sales: int, opt_sum_s
     return new_values_dict, remain, new_values_dict_sum
 
 
-def smudge_remain(new_values_dict: dict, remain: int, limit_value=300) -> tuple[dict, int]:
-    # Создаем новый файл и наполняем его значениями из словаря
+def spread_remain(new_values_dict: dict, remain: int, limit_value=300) -> tuple[dict, int]:
+    # Распределение остатка
 
     remain_dec = remain % 10
     remain_all = (remain // 10) * 10
@@ -106,7 +106,7 @@ def smudge_remain(new_values_dict: dict, remain: int, limit_value=300) -> tuple[
 
 
 def create_new_file(file_name: str, result_values_list: list[dict]) -> None:
-    # Соаздем новый файл и копируем в него данные из получившегося словаря
+    # Создаем новый файл и копируем в него данные из получившегося словаря
 
     wb = load_workbook(filename=file_name)
     ws = wb.active
@@ -118,6 +118,21 @@ def create_new_file(file_name: str, result_values_list: list[dict]) -> None:
     wb.save('new_' + file_name)
 
 
+def create_result_file(result: list[dict]) -> None:
+    wb = Workbook()
+    ws = wb.active
+    ws.title = 'Результаты'
+
+    i = 1
+
+    for item in result:
+        for key, value in item.items():
+            ws.cell(row=i, column=1).value = key
+            ws.cell(row=i, column=2).value = value
+            i += 1
+        i += 1
+
+    wb.save(filename='Результаты.xlsx')
 # Рабочий вариант!!!!
 #
 # for key, value in dict2.items():
