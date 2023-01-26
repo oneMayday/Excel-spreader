@@ -2,7 +2,14 @@
 venv/
 .idea/
 __pycache__/
+build/
+dist/
+
 test.py
+
+main.spec
+spreader.spec
+
 matrix.xlsx
 new_matrix.xlsx
 result.xlsx

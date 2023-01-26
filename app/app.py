@@ -1,6 +1,8 @@
 import customtkinter
+import sys
 import tkinter
 
+from os import path
 from tkinter import messagebox
 from PIL import Image
 from spreader import create_new_file, create_result_file
@@ -24,8 +26,20 @@ class App(customtkinter.CTk):
         self.title("Spreader")
         self.resizable(False, False)
 
+        def resource_path(relative_path):
+            """ Получение абсолютного пути к файлу, для работы из IDE и при использовании pyinstaller """
+
+            try:
+                # Pyinstaller создает временный каталог в _MEIPASS
+                base_path = sys._MEIPASS
+                return path.join(base_path, relative_path[10:])
+            except Exception:
+                base_path = path.abspath(".")
+                return path.join(base_path, relative_path)
+
         # Вставка логотипа
-        self.logo = customtkinter.CTkImage(dark_image=Image.open("app/spreader.png"), size=(400, 80))
+        self.logo = customtkinter.CTkImage(dark_image=Image.open(resource_path("resources/spreader.png")),
+                                           size=(400, 80))
         self.logo_label = customtkinter.CTkLabel(master=self, text='', image=self.logo, anchor=tkinter.CENTER)
         self.logo_label.pack()
 
@@ -36,22 +50,24 @@ class App(customtkinter.CTk):
         # Поля ввода имени файла и стартовой ячейки
         self.entry_file_name = customtkinter.CTkEntry(master=self.main_frame, width=300,
                                                       placeholder_text='Введите имя файла', font=('Roboto', 12))
-        self.entry_file_name.place(x=20, y=20)
+        self.entry_file_name.place(x=25, y=20)
 
         self.entry_start_cell = customtkinter.CTkEntry(master=self.main_frame, width=300,
                                                        placeholder_text='Введите адрес первой ячейки с SAP кодом',
                                                        font=('Roboto', 12))
-        self.entry_start_cell.place(x=20, y=60)
+        self.entry_start_cell.place(x=25, y=60)
 
         # Создаем чекбокс для создания сводной таблицы результатов
         self.check_creating = tkinter.IntVar(value=1)
         self.create_additional_file = customtkinter.CTkCheckBox(master=self.main_frame,
                                                                 text='Создать сводный файл с результатами',
-                                                                font=('Roboto', 12), variable=self.check_creating)
-        self.create_additional_file.place(x=20, y=100)
+                                                                fg_color='#264ab5', font=('Roboto', 12),
+                                                                variable=self.check_creating)
+        self.create_additional_file.place(x=25, y=100)
 
         # Кнопка старта программы
-        start_program = customtkinter.CTkButton(master=self.main_frame, command=self.start_main, text='Начать')
+        start_program = customtkinter.CTkButton(master=self.main_frame, fg_color='#264ab5',
+                                                command=self.start_main, text_color='#191a19', text='Старт')
         start_program.place(relx=0.5, y=150, anchor=tkinter.CENTER)
 
     def start_main(self):
