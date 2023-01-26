@@ -14,4 +14,9 @@ pyinstaller --noconfirm --onefile -n spreader --windowed --icon=resources\fav.ic
 :\python\projects\excel cell spreader\venv\lib\site-packages\customtkinter;customtkinter/" main.py 
 
 Скрин интерфейса:
+
+
+
+
+
 [![spreader.png](https://i.postimg.cc/QxkR1c47/spreader.png)](https://postimg.cc/dL3HKZKQ)
