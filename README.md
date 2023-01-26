@@ -10,8 +10,7 @@
 Для сборки приложения в exe-файл можно использовать pyinstaller (актуально для версии 5.7.0).
 В терминале нужно ввести следующую команду:
 
-pyinstaller --noconfirm --onefile -n spreader --windowed --icon=resources\fav.ico --add-data "resources\spreader.png;." --add-data "d
-:\python\projects\excel cell spreader\venv\lib\site-packages\customtkinter;customtkinter/" main.py 
+pyinstaller --noconfirm --onefile -n spreader --windowed --icon=resources\fav.ico --add-data "resources\spreader.png;." --add-data "PATH_TO_YOUR_PROJECT\venv\lib\site-packages\customtkinter;customtkinter/" main.py 
 
 Скрин интерфейса:
 
