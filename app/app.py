@@ -66,9 +66,15 @@ class App(customtkinter.CTk):
         self.create_additional_file.place(x=25, y=100)
 
         # Кнопка старта программы
-        start_program = customtkinter.CTkButton(master=self.main_frame, fg_color='#264ab5',
-                                                command=self.start_main, text_color='#191a19', text='Старт')
-        start_program.place(relx=0.5, y=150, anchor=tkinter.CENTER)
+        self.start_program = customtkinter.CTkButton(master=self.main_frame, fg_color='#264ab5',
+                                                     command=self.start_main, text_color='#191a19', text='Старт')
+        self.start_program.place(relx=0.5, y=150, anchor=tkinter.CENTER)
+
+        # Кнопка информации
+        self.help_info = customtkinter.CTkButton(master=self.main_frame, command=self.show_info,
+                                                 text='Help', width=10,
+                                                 text_color='#191a19', fg_color='#264ab5', font=('Roboto', 12))
+        self.help_info.place(x=285, y=137)
 
     def start_main(self):
         """ Функция выполняется при нажатии на кнопку. Внутри происходит проверка введенных полей и их обработка.
@@ -94,3 +100,29 @@ class App(customtkinter.CTk):
             create_result_file(result_calculated_values)
 
         messagebox.showinfo(title='Все прошло удачно', message="Готово!")
+
+    @staticmethod
+    def show_info():
+        """ Окно помощи """
+
+        window_info = customtkinter.CTkToplevel()
+        window_info.geometry("560x240")
+        window_info.title("Help")
+        window_info.resizable(False, False)
+
+        window_info_frame = customtkinter.CTkTextbox(window_info)
+        window_info_frame.place(relx=0.5, rely=0.5, relwidth=0.95, relheight=0.9, anchor=tkinter.CENTER)
+
+        window_info_frame.insert('0.0', 'Для корректной работы программы необходимо:\n\n'
+                                        '1) Вводить имя файла необходимо с расширением, например: "some_file.xlsx".\n'
+                                        '2) В поле "Введите имя ячейки" необходимо ввести адрес первой ячейки,'
+                                        ' в которой\n'
+                                        '   находится первый SAP код первого товара.\n'
+                                        '3) Для правильной работы программы исходная матрица должен иметь\n'
+                                        '   следующую структуру:\n'
+                                        '       - Первый столбец (А) должен содержать SAP-кода.\n'
+                                        '       - Второй столбец (Б) должен содержать наименования товаров.\n'
+                                        '       - Столбцы со значениями должны начинаться со столбца "C".\n'
+                                        '       - Ячейки не должны содержать формул, только чистые значения.\n'
+                                        '       - После последнего столбца со значениями не должно быть каких-либо\n '
+                                        '         других значений.')
