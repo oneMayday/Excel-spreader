@@ -3,7 +3,7 @@
 - Приложение предназначено для распределения максимальных значений в таблице между другими ячейками.
 
 
-- Приложение подходит только для таблиц определенного вида
+- Приложение подходит только для таблиц определенного вида, информацию о структуре таблицы можно получить, нажав кнопку "help" в окне программы
 
 
 
@@ -18,4 +18,4 @@ pyinstaller --noconfirm --onefile -n spreader --windowed --icon=resources\fav.ic
 
 
 
-[![spreader.png](https://i.postimg.cc/QxkR1c47/spreader.png)](https://postimg.cc/dL3HKZKQ)
+[![spreader-window.png](https://i.postimg.cc/N0gHxdvn/spreader-window.png)](https://postimg.cc/SnvRS7sL)
