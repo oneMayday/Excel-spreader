@@ -9,9 +9,13 @@
 
 Для сборки приложения в exe-файл можно использовать pyinstaller (актуально для версии 5.7.0).
 В терминале нужно ввести следующую команду:
+    Для Windows:
+    pyinstaller --noconfirm --onefile -n spreader --windowed --icon=resources/fav.ico --add-data "resources/spreader.png;." --add-data "venv/lib/site-packages/customtkinter;customtkinter/" main.py
 
-    pyinstaller --noconfirm --onefile -n spreader --windowed --icon=resources\fav.ico --add-data "resources\spreader.png;." --add-data "PATH_TO_YOUR_PROJECT\venv\lib\site-packages\customtkinter;customtkinter/" main.py 
+    Для Линукс:
+    pyinstaller --noconfirm --onefile -n spreader --windowed --icon=resources/fav.ico --add-data "resources/spreader.png:." --add-data "venv/lib/site-packages/customtkinter:customtkinter/" main.py
 
+Если сборка с первого раза не получилась - нужно внимательно посмотреть пути до папки customtkinter, возможно в путь нужно добавить дополнителую ветку 'python'
 Скрин интерфейса:
 
 
