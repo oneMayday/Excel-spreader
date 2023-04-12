@@ -16,7 +16,7 @@
     Для Линукс:
     pyinstaller --noconfirm --onefile -n spreader --windowed --icon=resources/fav.ico --add-data "resources/spreader.png:." --add-data "venv/lib/site-packages/customtkinter:customtkinter/" main.py
 
-Если сборка с первого раза не получилась - нужно внимательно посмотреть пути до папки customtkinter, возможно в путь нужно добавить дополнителую ветку 'python'
+Если сборка с первого раза не получилась - нужно внимательно посмотреть пути до папки customtkinter, возможно в путь нужно добавить дополнителую ветку 'python'.\
 Скрин интерфейса:
 
 
